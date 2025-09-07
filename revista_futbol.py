@@ -10,7 +10,6 @@ menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔�
 
 # --- Portada ---
 if menu == "🏠 Portada":
-    import streamlit as st
 
 # Portada mejorada
 st.title("⚽ Revista Futbolera")
