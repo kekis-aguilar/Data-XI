@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Configuración
-st.set_page_config(page_title="DATA Xl", layout="wide")
+st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
 # Menú lateral
 menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔️ Comparador"])
@@ -12,7 +12,7 @@ menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔�
 if menu == "🏠 Portada":
     # Cabecera estilo revista
     st.markdown(
-        "<h1 style='text-align: center; color: darkgreen;'>DATA Xl</h1>", 
+        "<h1 style='text-align: center; color: darkgreen;'>ELEVEN DATA</h1>", 
         unsafe_allow_html=True)
     st.markdown(
         "<h3 style='text-align: center; color: gray;'>Edición Septiembre 2025</h3>", 
