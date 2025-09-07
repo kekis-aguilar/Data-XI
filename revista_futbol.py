@@ -10,17 +10,34 @@ menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔�
 
 # --- Portada ---
 if menu == "🏠 Portada":
-    st.title("⚽ Revista Futbolera")
-    st.subheader("Edición Digital")
-    st.image("https://upload.wikimedia.org/wikipedia/commons/6/6e/Soccer_ball.svg", width=150)
+    import streamlit as st
 
-    st.write("""
-    Bienvenido a la revista digital de **estadísticas futboleras**.  
-    Aquí encontrarás análisis, comparativas y visualizaciones interactivas sobre tus jugadores favoritos.
-    """)
+# Portada mejorada
+st.title("⚽ Revista Futbolera")
+st.markdown("### Edición Septiembre 2025")
+st.image("https://upload.wikimedia.org/wikipedia/commons/6/6e/Soccer_ball.svg", width=200)
 
-    st.markdown("### 📰 Última Noticia")
-    st.write("Messi y Cristiano siguen rompiendo récords. ¿Quién es el verdadero GOAT? Aquí analizamos sus números…")
+st.write("Bienvenido a la revista digital de **análisis estadístico de fútbol**. "
+         "Explora comparativas, dashboards y artículos exclusivos sobre el mundo del balompié.")
+
+# Noticias destacadas en columnas
+st.subheader("📰 Noticias Destacadas")
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.image("https://upload.wikimedia.org/wikipedia/commons/3/36/Leo_Messi_WC2022.jpg")
+    st.markdown("**Messi sigue imparable**")
+    st.caption("El astro argentino rompe otro récord histórico en goles y asistencias.")
+
+with col2:
+    st.image("https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg")
+    st.markdown("**Cristiano desafía el tiempo**")
+    st.caption("A sus 40 años, CR7 sigue demostrando vigencia en la élite.")
+
+with col3:
+    st.image("https://upload.wikimedia.org/wikipedia/commons/f/fc/Kylian_Mbappe_2019.jpg")
+    st.markdown("**Mbappé, el heredero**")
+    st.caption("El francés lidera la nueva generación y se acerca a la cima mundial.")
 
 # --- Dashboard ---
 elif menu == "📊 Dashboard":
