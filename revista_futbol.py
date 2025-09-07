@@ -12,7 +12,7 @@ menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔�
 if menu == "🏠 Portada":
     # Cabecera estilo revista
     st.markdown(
-        "<h1 style='text-align: center; color: darkgreen;'>⚽ DATA Xl</h1>", 
+        "<h1 style='text-align: center; color: darkgreen;'>DATA Xl</h1>", 
         unsafe_allow_html=True)
     st.markdown(
         "<h3 style='text-align: center; color: gray;'>Edición Septiembre 2025</h3>", 
