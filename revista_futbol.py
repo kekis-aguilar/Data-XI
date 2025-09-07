@@ -11,7 +11,7 @@ menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔�
 # --- Portada ---
 if menu == "🏠 Portada":
     # Portada mejorada
-    st.title("⚽ Revista Futbolera")
+    st.title("⚽ DATA Xl")
     st.markdown("### Edición Septiembre 2025")
     st.image("https://upload.wikimedia.org/wikipedia/commons/6/6e/Soccer_ball.svg", width=200)
 
