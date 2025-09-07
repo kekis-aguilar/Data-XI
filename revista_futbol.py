@@ -1,14 +1,16 @@
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Configuración
-st.set_page_config(page_title="Revista Futbolera", layout="wide")
+st.set_page_config(page_title="DATA Xl", layout="wide")
 
 # Menú lateral
 menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔️ Comparador"])
 
-# --- Portada ---
+# ------------------- PORTADA -------------------
 if menu == "🏠 Portada":
-    # Cabecera tipo magazine
+    # Cabecera estilo revista
     st.markdown(
         "<h1 style='text-align: center; color: darkgreen;'>⚽ Revista Futbolera</h1>", 
         unsafe_allow_html=True)
@@ -27,7 +29,7 @@ if menu == "🏠 Portada":
     </p>
     """, unsafe_allow_html=True)
 
-    # Noticias destacadas en columnas estilo tarjetas
+    # Noticias destacadas en columnas
     st.subheader("📰 Noticias Destacadas")
     col1, col2, col3 = st.columns(3)
 
@@ -45,3 +47,52 @@ if menu == "🏠 Portada":
         st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
         st.markdown("**Mbappé, el heredero**")
         st.caption("El francés lidera la nueva generación y se acerca a la cima mundial.")
+
+# ------------------- DASHBOARD -------------------
+elif menu == "📊 Dashboard":
+    st.title("📊 Dashboard de Estadísticas")
+
+    # Datos ejemplo
+    data = {
+        "Jugador": ["Messi", "Cristiano", "Mbappé", "Haaland"],
+        "Goles": [30, 28, 25, 27],
+        "Asistencias": [12, 9, 10, 5],
+        "Partidos": [28, 30, 26, 25]
+    }
+    df = pd.DataFrame(data)
+
+    # Tabla interactiva
+    st.dataframe(df)
+
+    # Gráfica de barras
+    st.subheader("Comparativa de Goles")
+    fig, ax = plt.subplots()
+    ax.bar(df["Jugador"], df["Goles"], color="blue")
+    ax.set_ylabel("Goles")
+    ax.set_title("Goles por jugador")
+    st.pyplot(fig)
+
+# ------------------- COMPARADOR -------------------
+elif menu == "⚔️ Comparador":
+    st.title("⚔️ Comparador de Jugadores")
+
+    jugadores = ["Messi", "Cristiano", "Mbappé", "Haaland"]
+    j1 = st.selectbox("Jugador 1", jugadores, index=0)
+    j2 = st.selectbox("Jugador 2", jugadores, index=1)
+
+    st.write(f"Comparando **{j1}** vs **{j2}**")
+
+    # Datos ejemplo para comparativa
+    stats = {
+        "Jugador": ["Messi", "Cristiano", "Mbappé", "Haaland"],
+        "Goles": [30, 28, 25, 27],
+        "Asistencias": [12, 9, 10, 5],
+        "Partidos": [28, 30, 26, 25]
+    }
+    df_stats = pd.DataFrame(stats)
+    jugador1 = df_stats[df_stats["Jugador"] == j1]
+    jugador2 = df_stats[df_stats["Jugador"] == j2]
+
+    # Mostrar tabla comparativa
+    comparativa = pd.concat([jugador1, jugador2])
+    st.dataframe(comparativa.set_index("Jugador"))
