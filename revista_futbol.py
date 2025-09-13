@@ -4,52 +4,25 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
-# ------------------ NAVBAR ------------------
-st.markdown(
-    """
-    <style>
-    .navbar {
-        display: flex;
-        align-items: center;
-        background-color: #f9f9f9;
-        padding: 10px 20px;
-        border-bottom: 2px solid #ddd;
-    }
-    .navbar img {
-        height: 50px;
-        margin-right: 20px;
-    }
-    .navbar a {
-        margin-right: 20px;
-        text-decoration: none;
-        font-weight: bold;
-        color: darkgreen;
-        font-size: 18px;
-    }
-    .navbar a:hover {
-        color: black;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Inicializar la página en sesión si no existe
 if "page" not in st.session_state:
     st.session_state.page = "portada"
 
-# Funciones para cambiar de página
-col1, col2, col3, col4 = st.columns([1,1,1,6])
+# ------------------ NAVBAR ------------------
+col1, col2, col3 = st.columns([1,1,1])
+
 with col1:
-    if st.button("🏠", help="Ir a Portada"):
+    # Logo → Portada
+    if st.button(" ", key="logo"):
         st.session_state.page = "portada"
+    st.image("https://raw.githubusercontent.com/tu_usuario/tu_repo/main/Eleven_Data.png", width=80)
 
 with col2:
-    if st.button("📊", help="Ir a Dashboard"):
+    if st.button("📊 Dashboard"):
         st.session_state.page = "dashboard"
 
 with col3:
-    if st.button("⚔️", help="Ir a Comparador"):
+    if st.button("⚔️ Comparador"):
         st.session_state.page = "comparador"
 
 
@@ -66,21 +39,6 @@ if st.session_state.page == "portada":
     Explora comparativas, dashboards y artículos exclusivos sobre tus jugadores favoritos.
     </p>
     """, unsafe_allow_html=True)
-
-    st.subheader("📰 Noticias Destacadas")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.image("https://images.unsplash.com/photo-1508098682722-e99c43a406b2", use_column_width=True)
-        st.markdown("**Messi sigue imparable**")
-        st.caption("El astro argentino rompe otro récord histórico en goles y asistencias.")
-    with col2:
-        st.image("https://images.unsplash.com/photo-1522770179533-24471fcdba45", use_column_width=True)
-        st.markdown("**Cristiano desafía el tiempo**")
-        st.caption("A sus 40 años, CR7 sigue demostrando vigencia en la élite.")
-    with col3:
-        st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
-        st.markdown("**Mbappé, el heredero**")
-        st.caption("El francés lidera la nueva generación y se acerca a la cima mundial.")
 
 elif st.session_state.page == "dashboard":
     st.title("📊 Dashboard de Estadísticas")
@@ -123,4 +81,3 @@ elif st.session_state.page == "comparador":
 
     comparativa = pd.concat([jugador1, jugador2])
     st.dataframe(comparativa.set_index("Jugador"))
-
