@@ -4,20 +4,35 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
-# ------------------ ESTILO GLOBAL ------------------
+# ------------------ SWITCH DE MODO ------------------
+modo_claro = st.toggle("🌞 / 🌙 Cambiar tema", value=True)
+
+# CSS dinámico
+if modo_claro:
+    fondo = "#ffffff"
+    texto = "#111111"
+    subtitulo = "#555555"
+    color_barras = "#007acc"
+else:
+    fondo = "#111111"
+    texto = "#f5f5f5"
+    subtitulo = "#aaaaaa"
+    color_barras = "limegreen"
+
 st.markdown(
-    """
+    f"""
     <style>
-    body {
-        background-color: #fff; /* Fondo blanco */
-    }
-    h1 {
+    .stApp {{
+        background-color: {fondo};
+        color: {texto};
+    }}
+    h1 {{
         font-size: 60px !important;
-    }
-    .subtitle {
-        font-size: 22px;
-        color: #444;
-    }
+        color: {texto};
+    }}
+    h3 {{
+        color: {subtitulo};
+    }}
     </style>
     """,
     unsafe_allow_html=True
@@ -29,14 +44,11 @@ with col1:
     st.image("https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png", width=100)
 with col2:
     st.markdown(
-        """
-        <h1 style='text-align: left; 
-                   font-size: 60px;
-                   color: #111;
-                   font-family: Arial Black, sans-serif;'>
+        f"""
+        <h1 style='text-align: left; font-family: Arial Black, sans-serif;'>
             ELEVEN DATA
         </h1>
-        <h3 style='text-align: left; color: #555;'>Edición Septiembre 2025</h3>
+        <h3 style='text-align: left;'>{'Edición Septiembre 2025'}</h3>
         """,
         unsafe_allow_html=True
     )
@@ -44,12 +56,14 @@ with col2:
 # ------------------ HERO IMAGE ------------------
 st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
 
-st.markdown("""
-<p style='text-align: center; font-size: 20px; color: #333;'>
-Bienvenido a la revista digital de <b>estadísticas y análisis de fútbol</b>.  
-Explora comparativas, dashboards y artículos exclusivos sobre tus jugadores favoritos.
-</p>
-""", unsafe_allow_html=True)
+st.markdown(
+    f"""
+    <p style='text-align: center; font-size: 20px; color:{texto};'>
+    Bienvenido a la revista digital de <b>estadísticas y análisis de fútbol</b>.  
+    Explora comparativas, dashboards y artículos exclusivos sobre tus jugadores favoritos.
+    </p>
+    """, unsafe_allow_html=True
+)
 
 # ------------------ NOTICIAS DESTACADAS ------------------
 st.subheader("📰 Noticias Destacadas")
@@ -84,9 +98,9 @@ df = pd.DataFrame(data)
 st.dataframe(df)
 
 fig, ax = plt.subplots()
-ax.bar(df["Jugador"], df["Goles"], color="#007acc")  # azul deportivo
-ax.set_ylabel("Goles")
-ax.set_title("Goles por jugador")
+ax.bar(df["Jugador"], df["Goles"], color=color_barras)
+ax.set_ylabel("Goles", color=texto)
+ax.set_title("Goles por jugador", color=texto)
 st.pyplot(fig)
 
 # ------------------ COMPARADOR ------------------
