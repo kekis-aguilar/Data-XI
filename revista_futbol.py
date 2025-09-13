@@ -15,7 +15,7 @@ with col1:
     # Logo → Portada
     if st.button(" ", key="logo"):
         st.session_state.page = "portada"
-    st.image("https://raw.githubusercontent.com/tu_usuario/tu_repo/main/Eleven_Data.png", width=80)
+    st.image("https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png", width=80)
 
 with col2:
     if st.button("📊 Dashboard"):
