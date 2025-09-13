@@ -2,50 +2,53 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Configuración
 st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
-# --------- CABECERA PERSONALIZADA ---------
-col1, col2, col3, col4 = st.columns([1, 0.5, 0.5, 6])
+# --------- CABECERA HORIZONTAL ---------
+st.markdown(
+    """
+    <style>
+    .navbar {
+        display: flex;
+        align-items: center;
+        background-color: #f9f9f9;
+        padding: 10px 20px;
+        border-bottom: 2px solid #ddd;
+    }
+    .navbar img {
+        height: 50px;
+        margin-right: 20px;
+    }
+    .navbar a {
+        margin-right: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        color: darkgreen;
+        font-size: 18px;
+    }
+    .navbar a:hover {
+        color: black;
+    }
+    </style>
 
-with col1:
-    # Logo clicable que redirige a Portada
-    st.markdown(
-        f"""
-        <a href='/?Navegación=🏠+Portada'>
-            <img src='https://raw.githubusercontent.com/tu_usuario/tu_repo/main/Eleven_Data.png' width='80'>
+    <div class="navbar">
+        <a href="/?page=portada">
+            <img src="https://raw.githubusercontent.com/tu_usuario/tu_repo/main/Eleven_Data.png">
         </a>
-        """,
-        unsafe_allow_html=True
-    )
+        <a href="/?page=portada">🏠 Portada</a>
+        <a href="/?page=dashboard">📊 Dashboard</a>
+        <a href="/?page=comparador">⚔️ Comparador</a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-with col2:
-    # Botón Dashboard
-    st.markdown(
-        f"""
-        <a href='/?Navegación=📊+Dashboard'>
-            <img src='https://img.icons8.com/ios-filled/50/000000/combo-chart.png' width='40'>
-        </a>
-        """,
-        unsafe_allow_html=True
-    )
-
-with col3:
-    # Botón Comparador
-    st.markdown(
-        f"""
-        <a href='/?Navegación=⚔️+Comparador'>
-            <img src='https://img.icons8.com/ios-filled/50/000000/compare.png' width='40'>
-        </a>
-        """,
-        unsafe_allow_html=True
-    )
-
-# --------- MENÚ LATERAL (mantener si quieres) ---------
-menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔️ Comparador"])
+# --------- CONTROL DE PÁGINA ---------
+query_params = st.experimental_get_query_params()
+page = query_params.get("page", ["portada"])[0]
 
 # ------------------- PORTADA -------------------
-if menu == "🏠 Portada":
+if page == "portada":
     st.markdown("<h1 style='text-align: center; color: darkgreen;'>ELEVEN DATA</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; color: gray;'>Edición Septiembre 2025</h3>", unsafe_allow_html=True)
 
@@ -64,19 +67,17 @@ if menu == "🏠 Portada":
         st.image("https://images.unsplash.com/photo-1508098682722-e99c43a406b2", use_column_width=True)
         st.markdown("**Messi sigue imparable**")
         st.caption("El astro argentino rompe otro récord histórico en goles y asistencias.")
-
     with col2:
         st.image("https://images.unsplash.com/photo-1522770179533-24471fcdba45", use_column_width=True)
         st.markdown("**Cristiano desafía el tiempo**")
         st.caption("A sus 40 años, CR7 sigue demostrando vigencia en la élite.")
-
     with col3:
         st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
         st.markdown("**Mbappé, el heredero**")
         st.caption("El francés lidera la nueva generación y se acerca a la cima mundial.")
 
 # ------------------- DASHBOARD -------------------
-elif menu == "📊 Dashboard":
+elif page == "dashboard":
     st.title("📊 Dashboard de Estadísticas")
 
     data = {
@@ -97,7 +98,7 @@ elif menu == "📊 Dashboard":
     st.pyplot(fig)
 
 # ------------------- COMPARADOR -------------------
-elif menu == "⚔️ Comparador":
+elif page == "comparador":
     st.title("⚔️ Comparador de Jugadores")
 
     jugadores = ["Messi", "Cristiano", "Mbappé", "Haaland"]
