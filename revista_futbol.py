@@ -12,15 +12,13 @@ if "page" not in st.session_state:
 col1, col2, col3 = st.columns([1,1,1])
 
 with col1:
-    # Logo como imagen clicable
-    st.markdown(
-        f"""
-        <a href="?page=portada">
-            <img src="https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png" width="80">
-        </a>
-        """,
-        unsafe_allow_html=True
-    )
+    # Logo clicable (cambia el estado, no abre otra pestaña)
+    if st.image(
+        "https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png",
+        width=80,
+        caption=" ",  # truco para que no tenga caption
+    ):
+        st.session_state.page = "portada"
 
 with col2:
     if st.button("📊 Dashboard"):
@@ -31,11 +29,6 @@ with col3:
         st.session_state.page = "comparador"
 
 
-# ------------------ CONTROL DE QUERY PARAMS ------------------
-query_params = st.experimental_get_query_params()
-if "page" in query_params:
-    st.session_state.page = query_params["page"][0]
-
 # ------------------ CONTENIDO ------------------
 if st.session_state.page == "portada":
     st.markdown("<h1 style='text-align: center; color: darkgreen;'>ELEVEN DATA</h1>", unsafe_allow_html=True)
@@ -43,16 +36,8 @@ if st.session_state.page == "portada":
 
     st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
 
-    st.markdown("""
-    <p style='text-align: center; font-size: 18px;'>
-    Bienvenido a la revista digital de <b>estadísticas y análisis de fútbol</b>.  
-    Explora comparativas, dashboards y artículos exclusivos sobre tus jugadores favoritos.
-    </p>
-    """, unsafe_allow_html=True)
-
 elif st.session_state.page == "dashboard":
     st.title("📊 Dashboard de Estadísticas")
-
     data = {
         "Jugador": ["Messi", "Cristiano", "Mbappé", "Haaland"],
         "Goles": [30, 28, 25, 27],
@@ -60,34 +45,12 @@ elif st.session_state.page == "dashboard":
         "Partidos": [28, 30, 26, 25]
     }
     df = pd.DataFrame(data)
-
     st.dataframe(df)
-
-    st.subheader("Comparativa de Goles")
-    fig, ax = plt.subplots()
-    ax.bar(df["Jugador"], df["Goles"], color="blue")
-    ax.set_ylabel("Goles")
-    ax.set_title("Goles por jugador")
-    st.pyplot(fig)
 
 elif st.session_state.page == "comparador":
     st.title("⚔️ Comparador de Jugadores")
-
     jugadores = ["Messi", "Cristiano", "Mbappé", "Haaland"]
     j1 = st.selectbox("Jugador 1", jugadores, index=0)
     j2 = st.selectbox("Jugador 2", jugadores, index=1)
-
     st.write(f"Comparando **{j1}** vs **{j2}**")
 
-    stats = {
-        "Jugador": ["Messi", "Cristiano", "Mbappé", "Haaland"],
-        "Goles": [30, 28, 25, 27],
-        "Asistencias": [12, 9, 10, 5],
-        "Partidos": [28, 30, 26, 25]
-    }
-    df_stats = pd.DataFrame(stats)
-    jugador1 = df_stats[df_stats["Jugador"] == j1]
-    jugador2 = df_stats[df_stats["Jugador"] == j2]
-
-    comparativa = pd.concat([jugador1, jugador2])
-    st.dataframe(comparativa.set_index("Jugador"))
