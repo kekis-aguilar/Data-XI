@@ -25,13 +25,12 @@ with col3:
     if st.button("⚔️ Comparador"):
         st.session_state.page = "comparador"
 
-
 # ------------------ CONTENIDO ------------------
 if st.session_state.page == "portada":
     st.markdown("<h1 style='text-align: center; color: darkgreen;'>ELEVEN DATA</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; color: gray;'>Edición Septiembre 2025</h3>", unsafe_allow_html=True)
 
-
+    st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
 
     st.markdown("""
     <p style='text-align: center; font-size: 18px;'>
