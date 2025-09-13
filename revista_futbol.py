@@ -2,28 +2,55 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-st.image("Eleven_Data.png", width=200)
-
 # Configuración
 st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
-# Menú lateral
+# --------- CABECERA PERSONALIZADA ---------
+col1, col2, col3, col4 = st.columns([1, 0.5, 0.5, 6])
+
+with col1:
+    # Logo clicable que redirige a Portada
+    st.markdown(
+        f"""
+        <a href='/?Navegación=🏠+Portada'>
+            <img src='https://raw.githubusercontent.com/tu_usuario/tu_repo/main/Eleven_Data.png' width='80'>
+        </a>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col2:
+    # Botón Dashboard
+    st.markdown(
+        f"""
+        <a href='/?Navegación=📊+Dashboard'>
+            <img src='https://img.icons8.com/ios-filled/50/000000/combo-chart.png' width='40'>
+        </a>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col3:
+    # Botón Comparador
+    st.markdown(
+        f"""
+        <a href='/?Navegación=⚔️+Comparador'>
+            <img src='https://img.icons8.com/ios-filled/50/000000/compare.png' width='40'>
+        </a>
+        """,
+        unsafe_allow_html=True
+    )
+
+# --------- MENÚ LATERAL (mantener si quieres) ---------
 menu = st.sidebar.radio("Navegación", ["🏠 Portada", "📊 Dashboard", "⚔️ Comparador"])
 
 # ------------------- PORTADA -------------------
 if menu == "🏠 Portada":
-    # Cabecera estilo revista
-    st.markdown(
-        "<h1 style='text-align: center; color: darkgreen;'>ELEVEN DATA</h1>", 
-        unsafe_allow_html=True)
-    st.markdown(
-        "<h3 style='text-align: center; color: gray;'>Edición Septiembre 2025</h3>", 
-        unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: darkgreen;'>ELEVEN DATA</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: gray;'>Edición Septiembre 2025</h3>", unsafe_allow_html=True)
 
-    # Hero image
     st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
 
-    # Texto de bienvenida
     st.markdown("""
     <p style='text-align: center; font-size: 18px;'>
     Bienvenido a la revista digital de <b>estadísticas y análisis de fútbol</b>.  
@@ -31,10 +58,8 @@ if menu == "🏠 Portada":
     </p>
     """, unsafe_allow_html=True)
 
-    # Noticias destacadas en columnas
     st.subheader("📰 Noticias Destacadas")
     col1, col2, col3 = st.columns(3)
-
     with col1:
         st.image("https://images.unsplash.com/photo-1508098682722-e99c43a406b2", use_column_width=True)
         st.markdown("**Messi sigue imparable**")
@@ -54,7 +79,6 @@ if menu == "🏠 Portada":
 elif menu == "📊 Dashboard":
     st.title("📊 Dashboard de Estadísticas")
 
-    # Datos ejemplo
     data = {
         "Jugador": ["Messi", "Cristiano", "Mbappé", "Haaland"],
         "Goles": [30, 28, 25, 27],
@@ -63,10 +87,8 @@ elif menu == "📊 Dashboard":
     }
     df = pd.DataFrame(data)
 
-    # Tabla interactiva
     st.dataframe(df)
 
-    # Gráfica de barras
     st.subheader("Comparativa de Goles")
     fig, ax = plt.subplots()
     ax.bar(df["Jugador"], df["Goles"], color="blue")
@@ -84,7 +106,6 @@ elif menu == "⚔️ Comparador":
 
     st.write(f"Comparando **{j1}** vs **{j2}**")
 
-    # Datos ejemplo para comparativa
     stats = {
         "Jugador": ["Messi", "Cristiano", "Mbappé", "Haaland"],
         "Goles": [30, 28, 25, 27],
@@ -95,6 +116,5 @@ elif menu == "⚔️ Comparador":
     jugador1 = df_stats[df_stats["Jugador"] == j1]
     jugador2 = df_stats[df_stats["Jugador"] == j2]
 
-    # Mostrar tabla comparativa
     comparativa = pd.concat([jugador1, jugador2])
     st.dataframe(comparativa.set_index("Jugador"))
