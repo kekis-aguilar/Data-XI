@@ -4,22 +4,26 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
-# ------------------ CABECERA ------------------
+# ------------------ ESTILO GLOBAL ------------------
 st.markdown(
     """
     <style>
     body {
-        background-color: #111; /* fondo oscuro */
+        background-color: #fff; /* Fondo blanco */
     }
     h1 {
         font-size: 60px !important;
+    }
+    .subtitle {
+        font-size: 22px;
+        color: #444;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Logo y título
+# ------------------ CABECERA ------------------
 col1, col2 = st.columns([1,6])
 with col1:
     st.image("https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png", width=100)
@@ -28,13 +32,11 @@ with col2:
         """
         <h1 style='text-align: left; 
                    font-size: 60px;
-                   background: -webkit-linear-gradient(#00ff99, #00ccff);
-                   -webkit-background-clip: text;
-                   -webkit-text-fill-color: transparent;
+                   color: #111;
                    font-family: Arial Black, sans-serif;'>
             ELEVEN DATA
         </h1>
-        <h3 style='text-align: left; color: gray;'>Edición Septiembre 2025</h3>
+        <h3 style='text-align: left; color: #555;'>Edición Septiembre 2025</h3>
         """,
         unsafe_allow_html=True
     )
@@ -43,7 +45,7 @@ with col2:
 st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
 
 st.markdown("""
-<p style='text-align: center; font-size: 20px;'>
+<p style='text-align: center; font-size: 20px; color: #333;'>
 Bienvenido a la revista digital de <b>estadísticas y análisis de fútbol</b>.  
 Explora comparativas, dashboards y artículos exclusivos sobre tus jugadores favoritos.
 </p>
@@ -82,7 +84,7 @@ df = pd.DataFrame(data)
 st.dataframe(df)
 
 fig, ax = plt.subplots()
-ax.bar(df["Jugador"], df["Goles"], color="limegreen")
+ax.bar(df["Jugador"], df["Goles"], color="#007acc")  # azul deportivo
 ax.set_ylabel("Goles")
 ax.set_title("Goles por jugador")
 st.pyplot(fig)
