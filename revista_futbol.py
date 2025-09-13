@@ -12,11 +12,10 @@ if "page" not in st.session_state:
 col1, col2, col3 = st.columns([1,1,1])
 
 with col1:
-    # Botón invisible que muestra el logo
-    if st.button("logo", key="logo_btn"):
+    # Botón que muestra tu logo en lugar de texto
+    if st.button(" ", key="logo_btn"):
         st.session_state.page = "portada"
 
-    # Reemplazar el texto del botón por el logo con CSS
     st.markdown(
         f"""
         <style>
@@ -26,6 +25,7 @@ with col1:
             height: 80px;
             width: 80px;
             border: none;
+            padding: 0;
         }}
         div[data-testid="stButton"][key="logo_btn"] button:hover {{
             opacity: 0.7;
