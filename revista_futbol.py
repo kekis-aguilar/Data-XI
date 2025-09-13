@@ -53,8 +53,19 @@ with col2:
         unsafe_allow_html=True
     )
 
-# ------------------ HERO IMAGE ------------------
-st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
+# ------------------ HERO VIDEO ------------------
+st.markdown(
+    """
+    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <iframe width="800" height="450" 
+            src="https://www.youtube.com/embed/xFp7btucv58" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+            encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
 
 st.markdown(
     f"""
