@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
-# Inicializar página si no existe
+# Inicializar la página en sesión si no existe
 if "page" not in st.session_state:
     st.session_state.page = "portada"
 
@@ -12,24 +12,26 @@ if "page" not in st.session_state:
 col1, col2, col3 = st.columns([1,1,1])
 
 with col1:
-    # Logo como botón (clicable → regresa a portada)
-    if st.button(" ", key="logo_btn"):
+    # Botón invisible que muestra el logo
+    if st.button("logo", key="logo_btn"):
         st.session_state.page = "portada"
+
+    # Reemplazar el texto del botón por el logo con CSS
     st.markdown(
         f"""
         <style>
-        div[data-testid="stButton"] button {{
-            background: none;
+        div[data-testid="stButton"][key="logo_btn"] button {{
+            background: url("https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png") no-repeat center;
+            background-size: contain;
+            height: 80px;
+            width: 80px;
             border: none;
-            padding: 0;
         }}
-        div[data-testid="stButton"] button:hover {{
+        div[data-testid="stButton"][key="logo_btn"] button:hover {{
             opacity: 0.7;
+            cursor: pointer;
         }}
         </style>
-        <div style="margin-top:-60px;">
-            <img src="https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png" width="80">
-        </div>
         """,
         unsafe_allow_html=True
     )
