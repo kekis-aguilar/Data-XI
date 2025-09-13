@@ -58,7 +58,7 @@ st.markdown(
     """
     <div style="display: flex; justify-content: center; margin-bottom: 20px;">
         <iframe width="800" height="450" 
-            src="https://www.youtube.com/embed/xFp7btucv58" 
+            src="https://www.youtube.com/watch?v=dUIvoexhMyw" 
             frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
             encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
