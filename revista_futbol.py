@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+st.image("Eleven_Data.png", width=200)
+
 # Configuración
 st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
