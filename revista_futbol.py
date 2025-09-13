@@ -12,29 +12,15 @@ if "page" not in st.session_state:
 col1, col2, col3 = st.columns([1,1,1])
 
 with col1:
-    # Botón que muestra tu logo en lugar de texto
-    if st.button(" ", key="logo_btn"):
-        st.session_state.page = "portada"
-
-    st.markdown(
+    clicked = st.markdown(
         f"""
-        <style>
-        div[data-testid="stButton"][key="logo_btn"] button {{
-            background: url("https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png") no-repeat center;
-            background-size: contain;
-            height: 80px;
-            width: 80px;
-            border: none;
-            padding: 0;
-        }}
-        div[data-testid="stButton"][key="logo_btn"] button:hover {{
-            opacity: 0.7;
-            cursor: pointer;
-        }}
-        </style>
+        <a href="#" onclick="window.location.reload();">
+            <img src="https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png" width="80">
+        </a>
         """,
         unsafe_allow_html=True
     )
+    # ⚠️ Este truco recarga la página y vuelve al inicio (portada)
 
 with col2:
     if st.button("📊 Dashboard"):
