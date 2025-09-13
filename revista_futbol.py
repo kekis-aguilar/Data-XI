@@ -12,10 +12,15 @@ if "page" not in st.session_state:
 col1, col2, col3 = st.columns([1,1,1])
 
 with col1:
-    # Logo → Portada
-    if st.button(" ", key="logo"):
-        st.session_state.page = "portada"
-    st.image("https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png", width=80)
+    # Logo como imagen clicable
+    st.markdown(
+        f"""
+        <a href="?page=portada">
+            <img src="https://raw.githubusercontent.com/kekis-aguilar/Data-XI/88f7bfee363408bba592025e74c9ea453148cf95/Eleven_Data.png" width="80">
+        </a>
+        """,
+        unsafe_allow_html=True
+    )
 
 with col2:
     if st.button("📊 Dashboard"):
@@ -24,6 +29,12 @@ with col2:
 with col3:
     if st.button("⚔️ Comparador"):
         st.session_state.page = "comparador"
+
+
+# ------------------ CONTROL DE QUERY PARAMS ------------------
+query_params = st.experimental_get_query_params()
+if "page" in query_params:
+    st.session_state.page = query_params["page"][0]
 
 # ------------------ CONTENIDO ------------------
 if st.session_state.page == "portada":
