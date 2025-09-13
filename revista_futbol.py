@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="ELEVEN DATA", layout="wide")
 
-# --------- CABECERA HORIZONTAL ---------
+# ------------------ NAVBAR ------------------
 st.markdown(
     """
     <style>
@@ -30,25 +30,31 @@ st.markdown(
         color: black;
     }
     </style>
-
-    <div class="navbar">
-        <a href="/?page=portada">
-            <img src="https://raw.githubusercontent.com/tu_usuario/tu_repo/main/Eleven_Data.png">
-        </a>
-        <a href="/?page=portada">🏠 Portada</a>
-        <a href="/?page=dashboard">📊 Dashboard</a>
-        <a href="/?page=comparador">⚔️ Comparador</a>
-    </div>
     """,
     unsafe_allow_html=True
 )
 
-# --------- CONTROL DE PÁGINA ---------
-query_params = st.experimental_get_query_params()
-page = query_params.get("page", ["portada"])[0]
+# Inicializar la página en sesión si no existe
+if "page" not in st.session_state:
+    st.session_state.page = "portada"
 
-# ------------------- PORTADA -------------------
-if page == "portada":
+# Funciones para cambiar de página
+col1, col2, col3, col4 = st.columns([1,1,1,6])
+with col1:
+    if st.button("🏠", help="Ir a Portada"):
+        st.session_state.page = "portada"
+
+with col2:
+    if st.button("📊", help="Ir a Dashboard"):
+        st.session_state.page = "dashboard"
+
+with col3:
+    if st.button("⚔️", help="Ir a Comparador"):
+        st.session_state.page = "comparador"
+
+
+# ------------------ CONTENIDO ------------------
+if st.session_state.page == "portada":
     st.markdown("<h1 style='text-align: center; color: darkgreen;'>ELEVEN DATA</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; color: gray;'>Edición Septiembre 2025</h3>", unsafe_allow_html=True)
 
@@ -76,8 +82,7 @@ if page == "portada":
         st.markdown("**Mbappé, el heredero**")
         st.caption("El francés lidera la nueva generación y se acerca a la cima mundial.")
 
-# ------------------- DASHBOARD -------------------
-elif page == "dashboard":
+elif st.session_state.page == "dashboard":
     st.title("📊 Dashboard de Estadísticas")
 
     data = {
@@ -97,8 +102,7 @@ elif page == "dashboard":
     ax.set_title("Goles por jugador")
     st.pyplot(fig)
 
-# ------------------- COMPARADOR -------------------
-elif page == "comparador":
+elif st.session_state.page == "comparador":
     st.title("⚔️ Comparador de Jugadores")
 
     jugadores = ["Messi", "Cristiano", "Mbappé", "Haaland"]
@@ -119,3 +123,4 @@ elif page == "comparador":
 
     comparativa = pd.concat([jugador1, jugador2])
     st.dataframe(comparativa.set_index("Jugador"))
+
