@@ -76,7 +76,7 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# ------------------ NOTICIAS DESTACADAS ------------------
+# ------------------ SECCIÓN INTERACTIVA ------------------
 # ------------------ SECCIÓN INTERACTIVA ------------------
 st.subheader("📊 Sección Interactiva")
 
@@ -89,9 +89,10 @@ with col1:
     st.markdown("- 🚀 Cristiano Ronaldo salta hasta **2.93m** en un cabezazo.")
     st.markdown("- 🥅 El gol más rápido fue a los **2.4 segundos** (Arabia Saudita, 2009).")
 
-# --- Columna 2 y 3: Selector de liga ---
+# --- Selector de liga (arriba de las tablas) ---
+st.markdown("### ⚽ Selecciona una liga")
 ligas = ["Liga MX", "Premier League", "LaLiga", "Serie A"]
-liga_seleccionada = st.selectbox("Selecciona una liga", ligas)
+liga_seleccionada = st.selectbox("", ligas)
 
 # Datos de ejemplo
 tablas_posiciones = {
@@ -136,7 +137,9 @@ tablas_goleo = {
     })
 }
 
-# --- Columna 2: Tabla General ---
+# --- Columnas para mostrar tablas ---
+col2, col3 = st.columns(2)
+
 with col2:
     st.subheader(f"🏆 {liga_seleccionada} - Tabla General")
     st.dataframe(
@@ -145,7 +148,6 @@ with col2:
         )
     )
 
-# --- Columna 3: Tabla de Goleadores ---
 with col3:
     st.subheader(f"🥇 {liga_seleccionada} - Goleadores")
     st.dataframe(
