@@ -77,24 +77,29 @@ st.markdown(
 )
 
 # ------------------ NOTICIAS DESTACADAS ------------------
-st.subheader("📰 Noticias Destacadas")
-col1, col2, col3 = st.columns(3)
-
 with col1:
-    st.image("https://images.unsplash.com/photo-1508098682722-e99c43a406b2", use_column_width=True)
-    st.markdown("**Messi sigue imparable**")
-    st.caption("El astro argentino rompe otro récord histórico en goles y asistencias.")
-
+    st.subheader("🤯 Datos Curiosos")
+    st.markdown("- ⚽ El partido más largo de la historia duró **65 horas** en Inglaterra (1981).")
+    st.markdown("- 🚀 Cristiano Ronaldo salta hasta **2.93m** en un cabezazo, más que muchos jugadores de la NBA.")
+    st.markdown("- 🥅 El gol más rápido de la historia fue a los **2.4 segundos** (Arabia Saudita, 2009).")
 with col2:
-    st.image("https://images.unsplash.com/photo-1522770179533-24471fcdba45", use_column_width=True)
-    st.markdown("**Cristiano desafía el tiempo**")
-    st.caption("A sus 40 años, CR7 sigue demostrando vigencia en la élite.")
+    st.subheader("🏆 Tabla General - Liga MX")
+    data_liga = {
+        "Equipo": ["América", "Monterrey", "Chivas", "Pumas"],
+        "Pts": [30, 28, 25, 22],
+        "PJ": [14, 14, 14, 14]
+    }
+    df_liga = pd.DataFrame(data_liga)
+    st.table(df_liga)
 
 with col3:
-    st.image("https://images.unsplash.com/photo-1521412644187-c49fa049e84d", use_column_width=True)
-    st.markdown("**Mbappé, el heredero**")
-    st.caption("El francés lidera la nueva generación y se acerca a la cima mundial.")
-
+    st.subheader("🥇 Goleadores")
+    goleadores = {
+        "Jugador": ["Haaland", "Mbappé", "Cristiano", "Messi"],
+        "Goles": [12, 10, 9, 8]
+    }
+    df_goleadores = pd.DataFrame(goleadores)
+    st.table(df_goleadores)
 # ------------------ DASHBOARD ------------------
 st.subheader("📊 Dashboard de Estadísticas")
 
