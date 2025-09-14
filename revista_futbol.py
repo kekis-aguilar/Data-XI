@@ -77,29 +77,72 @@ st.markdown(
 )
 
 # ------------------ NOTICIAS DESTACADAS ------------------
+st.subheader("📊 Sección Interactiva")
+
+col1, col2, col3 = st.columns(3)
+
+# --- Columna 1: Datos curiosos ---
 with col1:
     st.subheader("🤯 Datos Curiosos")
     st.markdown("- ⚽ El partido más largo de la historia duró **65 horas** en Inglaterra (1981).")
-    st.markdown("- 🚀 Cristiano Ronaldo salta hasta **2.93m** en un cabezazo, más que muchos jugadores de la NBA.")
-    st.markdown("- 🥅 El gol más rápido de la historia fue a los **2.4 segundos** (Arabia Saudita, 2009).")
-with col2:
-    st.subheader("🏆 Tabla General - Liga MX")
-    data_liga = {
+    st.markdown("- 🚀 Cristiano Ronaldo salta hasta **2.93m** en un cabezazo.")
+    st.markdown("- 🥅 El gol más rápido fue a los **2.4 segundos** (Arabia Saudita, 2009).")
+
+# --- Columna 2 y 3: Selector de liga ---
+ligas = ["Liga MX", "Premier League", "LaLiga", "Serie A"]
+liga_seleccionada = st.selectbox("Selecciona una liga", ligas)
+
+# Datos de ejemplo
+tablas_posiciones = {
+    "Liga MX": pd.DataFrame({
         "Equipo": ["América", "Monterrey", "Chivas", "Pumas"],
         "Pts": [30, 28, 25, 22],
         "PJ": [14, 14, 14, 14]
-    }
-    df_liga = pd.DataFrame(data_liga)
-    st.table(df_liga)
+    }),
+    "Premier League": pd.DataFrame({
+        "Equipo": ["Man City", "Arsenal", "Liverpool", "Chelsea"],
+        "Pts": [34, 32, 29, 25],
+        "PJ": [14, 14, 14, 14]
+    }),
+    "LaLiga": pd.DataFrame({
+        "Equipo": ["Real Madrid", "Barcelona", "Atlético", "Sevilla"],
+        "Pts": [33, 31, 27, 21],
+        "PJ": [14, 14, 14, 14]
+    }),
+    "Serie A": pd.DataFrame({
+        "Equipo": ["Inter", "Milan", "Juventus", "Roma"],
+        "Pts": [35, 30, 28, 24],
+        "PJ": [14, 14, 14, 14]
+    })
+}
+
+tablas_goleo = {
+    "Liga MX": pd.DataFrame({
+        "Jugador": ["Henry Martín", "Gignac", "Quiñones"],
+        "Goles": [12, 10, 9]
+    }),
+    "Premier League": pd.DataFrame({
+        "Jugador": ["Haaland", "Salah", "Rashford"],
+        "Goles": [14, 11, 9]
+    }),
+    "LaLiga": pd.DataFrame({
+        "Jugador": ["Lewandowski", "Benzema", "Griezmann"],
+        "Goles": [13, 10, 8]
+    }),
+    "Serie A": pd.DataFrame({
+        "Jugador": ["Osimhen", "Lautaro", "Immobile"],
+        "Goles": [11, 9, 8]
+    })
+}
+
+with col2:
+    st.subheader(f"🏆 {liga_seleccionada} - Tabla General")
+    st.table(tablas_posiciones[liga_seleccionada])
 
 with col3:
-    st.subheader("🥇 Goleadores")
-    goleadores = {
-        "Jugador": ["Haaland", "Mbappé", "Cristiano", "Messi"],
-        "Goles": [12, 10, 9, 8]
-    }
-    df_goleadores = pd.DataFrame(goleadores)
-    st.table(df_goleadores)
+    st.subheader(f"🥇 {liga_seleccionada} - Goleadores")
+    st.table(tablas_goleo[liga_seleccionada])
+
 # ------------------ DASHBOARD ------------------
 st.subheader("📊 Dashboard de Estadísticas")
 
