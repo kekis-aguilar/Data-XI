@@ -77,6 +77,7 @@ st.markdown(
 )
 
 # ------------------ NOTICIAS DESTACADAS ------------------
+# ------------------ SECCIÓN INTERACTIVA ------------------
 st.subheader("📊 Sección Interactiva")
 
 col1, col2, col3 = st.columns(3)
@@ -135,13 +136,24 @@ tablas_goleo = {
     })
 }
 
+# --- Columna 2: Tabla General ---
 with col2:
     st.subheader(f"🏆 {liga_seleccionada} - Tabla General")
-    st.table(tablas_posiciones[liga_seleccionada])
+    st.dataframe(
+        tablas_posiciones[liga_seleccionada].style.set_properties(
+            **{"color": texto, "background-color": fondo}
+        )
+    )
 
+# --- Columna 3: Tabla de Goleadores ---
 with col3:
     st.subheader(f"🥇 {liga_seleccionada} - Goleadores")
-    st.table(tablas_goleo[liga_seleccionada])
+    st.dataframe(
+        tablas_goleo[liga_seleccionada].style.set_properties(
+            **{"color": texto, "background-color": fondo}
+        )
+    )
+
 
 # ------------------ DASHBOARD ------------------
 st.subheader("📊 Dashboard de Estadísticas")
